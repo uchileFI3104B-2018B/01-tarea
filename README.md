@@ -1,2 +1,5 @@
-# 01-tarea
-Tarea nro. 1, entrega 27 Sept. 23:59 hrs
+# Tarea nro. 1
+
+Fecha de entrega: 27 de Septiembre a las 23:59 hrs.
+
+(Enunciado en documento `enunciado.pdf`).
