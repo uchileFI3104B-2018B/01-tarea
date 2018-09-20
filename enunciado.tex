@@ -1,0 +1,281 @@
+\documentclass[letter, 11pt]{article}
+%% ================================
+%% Packages =======================
+\usepackage[utf8]{inputenc}      %%
+\usepackage[T1]{fontenc}         %%
+\usepackage{lmodern}             %%
+\usepackage[spanish]{babel}      %%
+\decimalpoint                    %%
+\usepackage{fullpage}            %%
+\usepackage{fancyhdr}            %%
+\usepackage{graphicx}            %%
+\usepackage{amsmath}             %%
+\usepackage{color}               %%
+\usepackage{mdframed}            %%
+\usepackage[colorlinks]{hyperref}%%
+%% ================================
+%% ================================
+
+%% ================================
+%% Page size/borders config =======
+\setlength{\oddsidemargin}{0in}  %%
+\setlength{\evensidemargin}{0in} %%
+\setlength{\marginparwidth}{0in} %%
+\setlength{\marginparsep}{0in}   %%
+\setlength{\voffset}{-0.5in}     %%
+\setlength{\hoffset}{0in}        %%
+\setlength{\topmargin}{0in}      %%
+\setlength{\headheight}{54pt}    %%
+\setlength{\headsep}{1em}        %%
+\setlength{\textheight}{8.5in}   %%
+\setlength{\footskip}{0.5in}     %%
+%% ================================
+%% ================================
+
+%% =============================================================
+%% Headers setup, environments, colors, etc.
+%%
+%% Header ------------------------------------------------------
+\fancypagestyle{firstpage}
+{
+  \fancyhf{}
+  \lhead{\includegraphics[height=4.5em]{LogoDFI.jpg}}
+  \rhead{FI3104-1 \semestre\\
+         Métodos Numéricos para la Ciencia e Ingeniería\\
+         Prof.: \profesor}
+  \fancyfoot[C]{\thepage}
+}
+
+\pagestyle{plain}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+%% -------------------------------------------------------------
+%% Environments -------------------------------------------------
+\newmdenv[
+  linecolor=gray,
+  fontcolor=gray,
+  linewidth=0.2em,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  skipabove=\topsep
+  skipbelow=\topsep,
+]{ayuda}
+%% -------------------------------------------------------------
+%% Colors ------------------------------------------------------
+\definecolor{gray}{rgb}{0.5, 0.5, 0.5}
+%% -------------------------------------------------------------
+%% Aliases ------------------------------------------------------
+\newcommand{\scipy}{\texttt{scipy}}
+%% -------------------------------------------------------------
+%% =============================================================
+%% =============================================================================
+%% CONFIGURACION DEL DOCUMENTO =================================================
+%% Llenar con la información pertinente al curso y la tarea
+%%
+\newcommand{\tareanro}{1}
+\newcommand{\fechaentrega}{27/09/2018 23:59 hrs}
+\newcommand{\semestre}{2018B}
+\newcommand{\profesor}{Valentino González}
+%% =============================================================================
+%% =============================================================================
+
+
+\begin{document}
+\thispagestyle{firstpage}
+
+\begin{center}
+  {\uppercase{\LARGE \bf Tarea \tareanro}}\\
+  Fecha de entrega: \fechaentrega
+\end{center}
+
+
+%% =============================================================================
+%% ENUNCIADO ===================================================================
+
+\noindent{\large \bf Problema 1 (40\%)}
+
+En clase vimos un método sencillo de para estimar la derivada de una función el
+cuál produce errores de orden $\mathcal{O}(h)$. La siguiente expresión para
+estimar la derivada de una función produce errores de orden $\mathcal{O}(h^4)$
+(a cambio de un mayor número de evaluaciones de la función):
+
+$$
+f'(x) = \dfrac{-f(x+2h) + 8 f(x+h) -8 f(x-h) + f(x-2h)}{12h} + \mathcal{O}(h^4)
+$$
+
+Compare el método más sencillo con el método propuesto de orden
+$\mathcal{O}(h^4)$ considerando la función $f(x)=-cos(x)$ para
+$x=1.\rm{XXX\,radianes}$ (donde XXX corresponde a los 3 últimos dígitos de su
+RUT, antes del dígito verificador). Para ello:
+
+\begin{enumerate}
+
+\item defina un rango apropiado de valores $h$ a explorar y compare su
+  estimación numérica de la derivada con el valor entregado por la función
+  \texttt{math.sin(1.\rm{XXX})} de \texttt{python}.
+
+\item Primero asegúrese de hacer todos sus cálculos utilizando números de tipo
+  \texttt{float32}. Luego compare su resultado con el resultado que se
+  obtendría utilizando números de tipo \texttt{float64} ó \texttt{float128} si
+  su computador soporta el tipo de arquitectura correcto.  
+
+\end{enumerate}
+
+En su informe, explique el comportamietno observado al hacer estas
+comparaciones, en particular explique: ¿dónde esta la ganancia entre un método
+de $\mathcal{O}(h^4)$ vs. un método $\mathcal{O}(h)$?; ¿cuál es la ganancia
+al usar números de mayor precisión?; ¿por qué la exactitud no mejora
+monotónicamente con un menor $h$?
+
+\begin{ayuda}
+  \small
+  {\bf Ayuda.}
+  Ud. debe decidir qué gráficos son los más interesantes para hacer la
+  comparación que se le pide. En particular, en este caso tiene sentido
+  utilizar escalas logarítmicas en ambos ejes. Utilice como guía el
+  \texttt{jupyter notebook} que se utilizó en clases para demostrar un ejemplo
+  similar.
+\end{ayuda}
+
+
+% \vspace{1.5em}
+% \noindent{\large \bf Problema 2}
+%
+% La temperatura efectiva de una estrella corresponde a la temperatura del cuerpo
+% negro que mejor reproduce su espectro. Por ejemplo, el cuerpo negro que mejor
+% se ajusta a nuestro Sol, tiene una temperatura aproximada de 5.778 K y por lo
+% tanto se dice que esa es la temperatura del Sol.
+%
+% \begin{enumerate}
+%
+%   \item El archivo \texttt{sun\_AM0.dat} contiene el espectro del Sol medido
+%     justo afuera de nuestra atmósfera. El archivo contiene el espectro en
+%     unidades de \emph{energía por unidad de tiempo por unidad de área por
+%     unidad de longitud de onda} (explore el archivo para encontrar las
+%     unidades). Lea el archivo y grafique el espectro del Sol (es decir,
+%     grafique flujo por unidad de longitud de onda vs. longitud de onda).  Use
+%     la convención astronómica para su gráfico, esto es, usar \emph{cgs} para
+%     las unidades de flujo y Angstrom o micrón para la longitud de onda.
+%     Recuerde anotar los ejes incluyendo las unidades.
+%
+%   \begin{ayuda}
+%     \small
+%     \noindent{\bf Ayuda.}
+%     \begin{itemize}
+%       \item El módulo \texttt{numpy} contiene la rutina \texttt{numpy.loadtxt}
+%           que le puede ser útil para leer el archivo.
+%       \item Para plotear se recomienda usar el módulo \texttt{matplotlib}. Hay
+%           muchos ejemplos, con código incluido en el siguiente
+%           \href{http://matplotlib.org/gallery.html}{link}, en particular,
+%           \href{http://matplotlib.org/examples/pylab_examples/simple_plot.html}{este
+%           ejemplo sencillo} le puede ser útil.
+%     \end{itemize}
+%   \end{ayuda}
+%
+%   \item Elija un método apropiado para integrar el espectro en longitud de onda
+%     y calcule la luminosidad total de la estrella (energía por unidad de
+%     tiempo). Al inegrar obtendrá energía por unidad de tiempo por unidad de
+%     área. Debe multiplicar por $4 \pi d^2$ para obtener la enería total por
+%     unidad de tiempo, donde $d$ es la distancia al Sol (\emph{googlee}). Se
+%     pide que escriba su propio algoritmo para llevar a cabo la integración, más
+%     adelante usaremos librerías de libre disposición.
+%
+%   \item La radiación de un cuerpo negro en unidades de energía por unidad de
+%     tiempo por unidad de área por unidad de longitud de onda está dada por la
+%     función de Planck:
+%     $$B_\lambda(T) = \frac{2 \pi h c^2 / \lambda^5}{e^{hc/\lambda k_BT} - 1} $$
+%
+%     donde $h$ es la constante de Planck, $c$ es la velocidad de la luz en el
+%     vacío, $k_B$ es la constante de Boltzmann, $T$ es la temperatura del cuerpo
+%     negro y $\lambda$ es la longitud de onda (además esta ecuación tiene un
+%     factor $\pi$ de más pues estamos interesados en integrar en ángulo sólido.
+%     No se preocupe por esto si no quiere, sólo use la ecuación dada).
+%
+%     Integre numéricamente la función de Planck para estimar la energía total
+%     por unidad de tiempo y de área superficial emitida por un cuerpo negro con
+%     la temperatura efectiva del Sol (escriba su propio algoritmo). Para obtener
+%     la energía total por unidad de tiempo, debe multiplicar su resultado por
+%     $4\pi R_{eff}^2$, donde $R_{eff}$ es el radio efectivo del Sol. Compare lo
+%     que acaba de calcular con la energía total calculada en 2 y use esta
+%     comparación para estimar el radio efectivo del Sol (Ud. acaba de calcular
+%     el tamaño del Sol).
+%
+%     \begin{ayuda}
+%       \noindent{\bf Nota.}
+%
+%       Se puede demostrar que la integral de la función de Planck corresponde a:
+%       $$P = \frac{2 \pi h}{c^2} \left(\frac{k_BT}{h}\right)^4
+%       \int_0^\infty\frac{x^3}{e^x - 1} dx $$
+%
+%       Y la integral se puede calcular analíticamente con resultado
+%       $\pi^4/15$. El problema pide elegir un método apropiado y {\bf calcular
+%       la integral numéricamente} para luego comparar con el resultado
+%       analítico.
+%       Implemente un algoritmo que permita ir refinando el valor de la
+%       integral con una tolerancia elegida por Ud.
+%     \end{ayuda}
+%
+%     \begin{ayuda}
+%       \small
+%       {\bf Ayuda.}
+%       \begin{itemize}
+%         \item El módulo \texttt{astropy} contiene el submódulo
+%           \texttt{astropy.constants} que incluye todas las constantes
+%           necesarias además de rutinas para cambiar unidades. Le podría ser
+%           útil pero no es necesario que lo use.
+%         \item La integral que es necesario calcular es entre $0$ e $\infty$ así
+%           que requiere ser normalizada. Puede intentar el cambio de variable $y
+%           = arctan(x)$ u otro que le parezca conveniente.
+%       \end{itemize}
+%     \end{ayuda}
+%
+%   \item El módulo \texttt{scipy} en \texttt{python} incluye las funciones
+%     \texttt{scipy.integrate.trapz} y \texttt{scipy.integrate.quad}.  Utilícelos
+%     para re-calcular las integrales calculadas en 2. y 3. (según corresponda,
+%     revise la ayuda para averiguar cuál función aplica en cada caso). Compare
+%     los valores obtenidos y la velocidad de ejecución del algoritmo escrito por
+%     Ud. vs. el de \texttt{scipy}. ¿A qué se debe la diferencia?
+%
+%       \begin{ayuda}
+%         \small
+%         {\bf Ayuda.}
+%
+%         En la consola \texttt{ipython} existe la \texttt{ipython magic
+%         \%timeit} que permite estimar velocidades de funciones.
+%       \end{ayuda}
+% \end{enumerate}
+
+
+
+\vspace{1em}
+\noindent{\bf Otras instrucciones importantes.}
+\begin{itemize}
+  
+  \item Lea siempre estas instrucciones, {\bf no son las mismas en todas las
+    tareas} y las diferencias suelen ser importantes.
+
+  \item Utilice \texttt{git} durante el desarrollo de la tarea para mantener un
+    historial de los cambios realizados. La siguiente
+    \href{https://education.github.com/git-cheat-sheet-education.pdf}{cheat
+    sheet} le puede ser útil. Esto no será evaluado esta vez pero evaluaremos
+    el use efectivo de git en el futuro, así que empiece a usarlo.
+
+  \item La tarea se entrega como un \texttt{push} simple a su repositorio
+    privado. El \texttt{push} debe incluir todos los códigos usados además de
+    su informe.
+
+  \item El informe debe ser entregado en formato \texttt{pdf}, este debe ser
+    claro sin información ni de más ni de menos. Esto es importante, no escriba
+    de más, esto no mejorara su nota sino que al contrario. 5 páginas es un
+    largo razonable para la presente tarea.  Asegúrese de utilizar figuras
+    efectivas y/o tablas para resumir sus resultados. Revise su ortografía.
+
+  \item No olvide indicar su RUT en el informe.
+
+\end{itemize}
+
+%% FIN ENUNCIADO ===============================================================
+%% =============================================================================
+
+\end{document}
