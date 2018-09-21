@@ -163,10 +163,10 @@ $$B_\nu(T) = \frac{2 h \nu^3 / c^2}{e^{h\nu/k_BT} - 1} $$
 
 donde $h$ es la constante de Planck, $c$ es la velocidad de la luz en el vacío,
 $k_B$ es la constante de Boltzmann, $T$ es la temperatura del cuerpo negro y
-$\lambda$ es la longitud de onda. En 1989 se puso en órbita el satélite COBE
-(Cosmic Background Explorer) con el objetivo de estudiar en detalle la
-radiación de fondo de microondas. Intentaremos determinar la temperatura de la
-radiación de fondo.
+$\nu$ es la frecuencia de la radiación. En 1989 se puso en órbita el satélite
+COBE (Cosmic Background Explorer) con el objetivo de estudiar en detalle la
+radiación de fondo de microondas. Usaremos sus datos para intentar determinar
+la temperatura de la radiación de fondo.
 
 \begin{enumerate}
   
@@ -204,14 +204,15 @@ radiación de fondo.
     \end{ayuda}
 
   \item Una forma (no la mejor) de medir la temperatura del cuerpo negro que da
-    origen a esta radiación es utilizar la ley de Stefan-Boltzman. Esta ley se
-    deriva integrando la función de Planck en frecuencia, de lo cual resulta:
+    origen a esta radiación es utilizar algo parecido a la ley de
+    Stefan-Boltzman. Lo haremos integrando la función de Planck en frecuencia,
+    de lo cual resulta:
 
-    $$P = \frac{2 \pi h}{c^2} \left(\frac{k_BT}{h}\right)^4
+    $$P = \frac{2 h}{c^2} \left(\frac{k_BT}{h}\right)^4
     \int_0^\infty\frac{x^3}{e^x - 1} dx $$
 
-    Y la integral se puede calcular analíticamente con resultado $\pi^4/15$.
-    Para efectos de esta tarea, elija un método apropiado y {\bf calcule la
+    La integral se puede calcular analíticamente con resultado $\pi^4/15$ pero
+    para efectos de esta tarea, elija un método apropiado y {\bf calcule la
     integral numéricamente} para luego comparar con el resultado analítico.
     Implemente un algoritmo que permita ir refinando el valor de la integral
     con una tolerancia elegida por Ud.
@@ -231,13 +232,19 @@ radiación de fondo.
     \end{ayuda}
 
   \item Ahora elija un método apropiado para integrar en frecuencia el {\bf
-    espectro observado}. Se pide que escriba su propio algoritmo para llevar a cabo
-    la integración, más adelante usaremos librerías de libre disposición.
-    Iguale su resultado con la integral de la función de Planck calculada en el
-    punto anterior, la única variable libre debería ser la temperatura que Ud.
-    puede ahora calcular. Su determinación debería ser levemente distinta a 
-    la temperatura reportada por COBE de 2.725 K. ¿Qué puede explicar la
-    diferencia?
+    espectro observado} (el del archivo
+    \texttt{firas\_monopole\_spec\_v1.txt}). Se pide que escriba su propio
+    algoritmo para llevar a cabo la integración, más adelante usaremos
+    librerías de libre disposición.  Iguale su resultado con la integral de la
+    función de Planck calculada en el punto anterior (teniendo cuidado con las
+    unidades), la única variable libre debería ser la temperatura que Ud. puede
+    ahora calcular resolviendo la ecuación que acaba de escribir. Su
+    determinación debería ser levemente distinta a la temperatura reportada por
+    COBE de 2.725 K. ¿Qué puede explicar la diferencia?
+
+  \item Repita su gráfico de la parte 1. pero esta vez agregue una función de
+    Planck con una temperatura de 2.725 K y otra con la temperatura que Ud.
+    calculó en la parte 3.
 
   \item El módulo \texttt{scipy} incluye las funciones
     \texttt{scipy.integrate.trapz} y \texttt{scipy.integrate.quad}.  Utilícelos
@@ -268,7 +275,7 @@ radiación de fondo.
     historial de los cambios realizados. La siguiente
     \href{https://education.github.com/git-cheat-sheet-education.pdf}{cheat
     sheet} le puede ser útil. Esto no será evaluado esta vez pero evaluaremos
-    el use efectivo de git en el futuro, así que empiece a usarlo.
+    el uso efectivo de git en el futuro, así que empiece a usarlo.
 
   \item La tarea se entrega como un \texttt{push} simple a su repositorio
     privado. El \texttt{push} debe incluir todos los códigos usados además de
