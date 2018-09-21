@@ -148,7 +148,7 @@ térmico. Con la expansión del Universo tanto la radiación como el plasma se
 enfrían. Eventualmente la temperatura baja lo suficiente para que protones y
 electrones se combinen en átomos neutros. La radiación remanente, por su parte,
 no puede ser absorbida por estos átomos neutros y comienza a viajar libremente
-por el Universo. Dicha radiación que continua perdiendo energía/disminuyendo
+por el Universo. Dicha radiación, que continua perdiendo energía/disminuyendo
 su temperatura, fue detectada por primera vez por Arno Penzias y Robert Wilson
 en 1964 (Premio Nobel de Física 1978) y se le conoce como la radiación de fondo
 de microondas, es una de las evidencias más sólidas de que el Universo fue
@@ -165,7 +165,8 @@ donde $h$ es la constante de Planck, $c$ es la velocidad de la luz en el vacío,
 $k_B$ es la constante de Boltzmann, $T$ es la temperatura del cuerpo negro y
 $\lambda$ es la longitud de onda. En 1989 se puso en órbita el satélite COBE
 (Cosmic Background Explorer) con el objetivo de estudiar en detalle la
-radiación de fondo de microondas.
+radiación de fondo de microondas. Intentaremos determinar la temperatura de la
+radiación de fondo.
 
 \begin{enumerate}
   
@@ -202,49 +203,18 @@ radiación de fondo de microondas.
       \end{itemize} 
     \end{ayuda}
 
-%   \item Elija un método apropiado para integrar el espectro en longitud de
-    %   onda y calcule la luminosidad total de la estrella (energía por unidad
-    %   de tiempo). Al inegrar obtendrá energía por unidad de tiempo por unidad
-    %   de área. Debe multiplicar por $4 \pi d^2$ para obtener la enería total
-    %   por unidad de tiempo, donde $d$ es la distancia al Sol
-    %   (\emph{googlee}). Se
-%     pide que escriba su propio algoritmo para llevar a cabo la integración,
-    %     más adelante usaremos librerías de libre disposición.
+  \item Una forma (no la mejor) de medir la temperatura del cuerpo negro que da
+    origen a esta radiación es utilizar la ley de Stefan-Boltzman. Esta ley se
+    deriva integrando la función de Planck en frecuencia, de lo cual resulta:
 
-  \item La radiación de un cuerpo negro en unidades de energía por unidad de
-    tiempo por unidad de área por unidad de longitud de onda está dada por la
-    función de Planck:
-    $$B_\lambda(T) = \frac{2 \pi h c^2 / \lambda^5}{e^{hc/\lambda k_BT} - 1} $$
+    $$P = \frac{2 \pi h}{c^2} \left(\frac{k_BT}{h}\right)^4
+    \int_0^\infty\frac{x^3}{e^x - 1} dx $$
 
-    donde $h$ es la constante de Planck, $c$ es la velocidad de la luz en el
-    vacío, $k_B$ es la constante de Boltzmann, $T$ es la temperatura del cuerpo
-    negro y $\lambda$ es la longitud de onda (además esta ecuación tiene un
-    factor $\pi$ de más pues estamos interesados en integrar en ángulo sólido.
-    No se preocupe por esto si no quiere, sólo use la ecuación dada).
-
-%     Integre numéricamente la función de Planck para estimar la energía total
-%     por unidad de tiempo y de área superficial emitida por un cuerpo negro con
-%     la temperatura efectiva del Sol (escriba su propio algoritmo). Para obtener
-%     la energía total por unidad de tiempo, debe multiplicar su resultado por
-%     $4\pi R_{eff}^2$, donde $R_{eff}$ es el radio efectivo del Sol. Compare lo
-%     que acaba de calcular con la energía total calculada en 2 y use esta
-%     comparación para estimar el radio efectivo del Sol (Ud. acaba de calcular
-%     el tamaño del Sol).
-
-    \begin{ayuda}
-      \noindent{\bf Nota.}
-
-      Se puede demostrar que la integral de la función de Planck corresponde a:
-      $$P = \frac{2 \pi h}{c^2} \left(\frac{k_BT}{h}\right)^4
-      \int_0^\infty\frac{x^3}{e^x - 1} dx $$
-
-      Y la integral se puede calcular analíticamente con resultado
-      $\pi^4/15$. El problema pide elegir un método apropiado y {\bf calcular
-      la integral numéricamente} para luego comparar con el resultado
-      analítico.
-      Implemente un algoritmo que permita ir refinando el valor de la
-      integral con una tolerancia elegida por Ud.
-    \end{ayuda}
+    Y la integral se puede calcular analíticamente con resultado $\pi^4/15$.
+    Para efectos de esta tarea, elija un método apropiado y {\bf calcule la
+    integral numéricamente} para luego comparar con el resultado analítico.
+    Implemente un algoritmo que permita ir refinando el valor de la integral
+    con una tolerancia elegida por Ud.
 
     \begin{ayuda}
       \small
@@ -259,6 +229,15 @@ radiación de fondo de microondas.
           = arctan(x)$ u otro que le parezca conveniente.
       \end{itemize}
     \end{ayuda}
+
+  \item Ahora elija un método apropiado para integrar en frecuencia el {\bf
+    espectro observado}. Se pide que escriba su propio algoritmo para llevar a cabo
+    la integración, más adelante usaremos librerías de libre disposición.
+    Iguale su resultado con la integral de la función de Planck calculada en el
+    punto anterior, la única variable libre debería ser la temperatura que Ud.
+    puede ahora calcular. Su determinación debería ser levemente distinta a 
+    la temperatura reportada por COBE de 2.725 K. ¿Qué puede explicar la
+    diferencia?
 
   \item El módulo \texttt{scipy} incluye las funciones
     \texttt{scipy.integrate.trapz} y \texttt{scipy.integrate.quad}.  Utilícelos
